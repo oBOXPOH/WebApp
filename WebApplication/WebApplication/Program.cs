@@ -15,27 +15,13 @@ namespace WebApplication
     {
         public static void Main(string[] args)
         {
-            using (var host = WebHost.Start("http://localhost:8080", context => context.Response.WriteAsync("Hello!")))
-            {
-                Console.WriteLine("Server has been started!");
-                host.WaitForShutdown();
-            }
-
-            //var host = new WebHostBuilder()
-            //    .UseKestrel()
-            //    .UseContentRoot(Directory.GetCurrentDirectory())
-            //    .UseIISIntegration()
-            //    .UseStartup<Startup>()
-            //    .Build();
-
-            //host.Run();
-
-            //BuildWebHost(args).Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                //.UseWebRoot(<not standard folder for static files>)
                 .Build();
     }
 }

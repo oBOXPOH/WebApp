@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using WebApplication.Middleware;
 
 namespace WebApplication
 {
@@ -32,11 +33,25 @@ namespace WebApplication
 
             app.UseStaticFiles();
             app.UseMvc();
+            app.UseStaticFiles();
+            app.UseMiddleware<AuthenticationMiddleware>();
+            app.UseMiddleware<RoutingMiddleware>();
+
+            app.Map("/index", (appBuilder) =>
+            {
+                app.Run(async (context) =>
+                {
+                    await context.Response.WriteAsync("It's INDEX");
+                });
+            });
 
             app.Run(async (context) =>
             {
                 x++;
-                await context.Response.WriteAsync("Hello World!");
+                string host = context.Request.Host.Value;
+                string path = context.Request.Path;
+                string query = context.Request.QueryString.Value;
+                await context.Response.WriteAsync($"<h1>{host}</h1><h2>{path}</h2><h3>{query}</h3>");
             });
         }
     }
