@@ -7,11 +7,19 @@ a {
     text-decoration: none;
 }
 
+.wrapper {
+    width: 1024px;
+    margin: auto;
+}
+
 body {
 }
 
 header {
+}
 
+#header-wrapper {
+    background-color: darkred;
 }
 
 #header {
@@ -23,23 +31,28 @@ header {
     text-align: center;
 }
 
-nav {
+#menu-wrapper {
     background-color: goldenrod;
-    text-align: center;
 }
 
-nav ul {
+#menu {
     list-style: none;
+    background-color: goldenrod;
 }
 
-nav a {
-    padding: 10px;
+#menu li {
+    display: inline-block;
+}
+
+#menu li a {
+    display: block;
+    padding: 14px;
     font-size: 14px;
     font-weight: bold;
     color: white;
     text-align: center;
 }
 
-nav a:hover {
+#menu li a:hover {
     background-color: darkgoldenrod;
 }
