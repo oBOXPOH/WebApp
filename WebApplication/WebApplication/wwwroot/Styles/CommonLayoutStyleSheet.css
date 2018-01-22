@@ -1,0 +1,45 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+}
+
+header {
+
+}
+
+#header {
+    background-color: darkred;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+nav {
+    background-color: goldenrod;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav a {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+nav a:hover {
+    background-color: darkgoldenrod;
+}

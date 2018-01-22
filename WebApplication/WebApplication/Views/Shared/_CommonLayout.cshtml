@@ -4,10 +4,23 @@
     <title>@ViewBag.Title</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="~/Styles/CommonLayoutStyleSheet.css" />
 </head>
 <body>
-    <nav></nav>
+    <header>
+        <div id="wrapper">
+            <div id="header">
+                Шапка
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <div>
         @RenderBody()
     </div>
