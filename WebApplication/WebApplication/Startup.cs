@@ -22,11 +22,6 @@ namespace WebApplication
         public Startup(IConfiguration configuration) // Constructor for initialization of needed parameters
         {
             Configuration = configuration;
-
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services) // Addition of services
