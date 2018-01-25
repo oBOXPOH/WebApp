@@ -8,6 +8,6 @@ namespace WebApplication.Models
 {
     public class User : IdentityUser
     {
-
+        public DateTime DOB { get; set; }
     }
 }

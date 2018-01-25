@@ -7,6 +7,12 @@ a {
     text-decoration: none;
 }
 
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .wrapper {
     width: 1024px;
     margin: auto;
@@ -35,7 +41,15 @@ header {
     background-color: goldenrod;
 }
 
+#menu-wrapper div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #menu {
+    display: inline-block;
     list-style: none;
     background-color: goldenrod;
 }
@@ -55,4 +69,11 @@ header {
 
 #menu li a:hover {
     background-color: darkgoldenrod;
+}
+
+#authentication {
+    display: inline-block;
+}
+
+#authentication a {
 }
