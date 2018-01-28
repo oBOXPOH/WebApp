@@ -1,0 +1,33 @@
+﻿@model  List<User>
+
+@{
+    Layout = "_ManageLayout";
+    ViewBag.Title = "Список пользователей";
+}
+
+<div>
+    <div id="users-list">
+        <table>
+            <tr>
+                <td>Логин</td>
+                <td>Роль</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>Пока не реализовано</td>
+                </tr>
+            }
+        </table>
+        <div>
+            Общее количество зарегистрированных: @Model.Count
+            <table>
+                <tr>
+                    <td>Роль</td>
+                    <td>Количество</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

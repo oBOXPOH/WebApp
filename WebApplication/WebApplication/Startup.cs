@@ -27,7 +27,14 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services) // Addition of services
         {
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+            })
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddMvc();

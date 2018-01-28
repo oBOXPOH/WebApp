@@ -1,0 +1,37 @@
+﻿@model LoginUserViewModel
+
+@{
+    Layout = "_CommonLayout";
+    ViewBag.Title = "Авторизация пользователя";
+}
+
+@section StylesSection {
+    <link href="~/Styles/AccountStyleSheet.css" rel="stylesheet" />
+    <link href="~/Styles/ValidationStyleSheet.css" rel="stylesheet" />
+}
+
+<div class="account-form">
+    <h2>Авторизация пользователя</h2><hr />
+    <form method="post" asp-controller="Account" asp-action="Login">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <input class="input" asp-for="LoginOrEmail" placeholder="Логин или Email" /><br />
+            <span asp-validation-for="LoginOrEmail"></span>
+        </div>
+        <div>
+            <input class="input" asp-for="Password" placeholder="Пароль" /><br />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <input asp-for="RememberMe" />
+            <label asp-for="RememberMe"></label>
+            <input class="button" type="submit" value="Войти" />
+        </div>
+    </form>
+</div>
+
+@section ScriptsSection {
+    <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

@@ -4,15 +4,15 @@
     <title>@ViewBag.Title</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/Styles/CommonStyleSheet.css" />
-    <link rel="stylesheet" href="~/Styles/CommonLayoutStyleSheet.css" />
+    <link href="~/Styles/CommonStyleSheet.css" rel="stylesheet" />
+    <link href="~/Styles/ManageLayoutStyleSheet.css" rel="stylesheet" />
     @RenderSection("StylesSection", false)
 </head>
 <body>
     <header>
         <div id="header-wrapper">
             <div id="header" class="wrapper">
-                Шапка
+                <a asp-controller="Home" asp-action="Index">На главную</a>
             </div>
         </div>
         <div id="menu-wrapper">

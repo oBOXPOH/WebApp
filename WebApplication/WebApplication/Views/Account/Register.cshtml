@@ -5,31 +5,40 @@
     ViewBag.Title = "Регистрация нового пользователя";
 }
 
-<h2>Регистрация нового пользователя</h2>
-<form method="post" asp-controller="Account" asp-action="Register">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <input asp-for="Login" />
-        <span asp-validation-for="Login"></span>
-    </div>
-    <div>
-        <input asp-for="EMail" />
-        <span asp-validation-for="EMail"></span>
-    </div>
-    <div>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <input asp-for="ConfirmPassword" />
-        <span asp-validation-for="ConfirmPassword"></span>
-    </div>
-    <div>
-        <input type="submit" value="Зарегистрироваться" />
-    </div>
-</form>
+@section StylesSection {
+    <link href="~/Styles/AccountStyleSheet.css" rel="stylesheet" />
+    <link href="~/Styles/ValidationStyleSheet.css" rel="stylesheet" />
+}
+
+<div class="account-form">
+    <h2>Регистрация нового пользователя</h2><hr />
+    <form method="post" asp-controller="Account" asp-action="Register">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <input class="input" asp-for="Login" placeholder="Логин" /><br />
+            <span asp-validation-for="Login"></span>
+        </div>
+        <div>
+            <input class="input" asp-for="EMail" placeholder="Email" /><br />
+            <span asp-validation-for="EMail"></span>
+        </div>
+        <div>
+            <input class="input" asp-for="Password" placeholder="Пароль" /><br />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <input class="input" asp-for="ConfirmPassword" placeholder="Повторите пароль" /><br />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <div>
+            <a class="button" href='javascript:history.go(-1)'>Отмена</a>
+            <input class="button" type="submit" value="Зарегистрироваться" />
+        </div>
+    </form>
+</div>
 
 @section ScriptsSection {
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 }

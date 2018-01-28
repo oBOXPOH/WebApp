@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    public class ApplicationContext : IdentityDbContext
+    public class ApplicationContext : IdentityDbContext<User>
     {
         public DbSet<Article> Articles { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }

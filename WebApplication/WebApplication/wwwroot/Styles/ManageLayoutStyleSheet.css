@@ -1,0 +1,34 @@
+﻿.wrapper {
+    width: 1024px;
+    margin: auto;
+}
+
+#header-wrapper {
+    background-color: darkred;
+}
+
+#header {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+}
+
+#header a {
+    color: goldenrod;
+}
+
+#header a:hover {
+    color: white;
+}
+
+#menu-wrapper {
+    background-color: darkslategray;
+}
+
+#menu-wrapper div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
