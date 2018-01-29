@@ -22,5 +22,18 @@ namespace WebApplication.Controllers
         {
             return View(userManager.Users.ToList());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(string id)
+        {
+            User user = await userManager.FindByIdAsync(id);
+
+            if (user != null)
+            {
+                await userManager.DeleteAsync(user);
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

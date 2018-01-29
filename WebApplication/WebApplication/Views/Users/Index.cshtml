@@ -5,18 +5,29 @@
     ViewBag.Title = "Список пользователей";
 }
 
-<div>
+@section StylesSection {
+    <link href="~/Styles/UsersStyleSheet.css" rel="stylesheet" />
+}
+
+<div id="users">
+    <h2>Список пользователей</h2><br />
     <div id="users-list">
         <table>
             <tr>
                 <td>Логин</td>
                 <td>Роль</td>
+                <td>Действия</td>
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.UserName</td>
                     <td>Пока не реализовано</td>
+                    <td>
+                        <form asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                            <button class="button" type="submit">Удалить</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </table>

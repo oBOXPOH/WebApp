@@ -1,4 +1,5 @@
 ﻿.button {
+    display: inline-block;
     background-color: darkred;
     color: white;
     font-size: 14px;
@@ -84,4 +85,13 @@ header {
 
 #authentication :last-child {
     margin-left: 5px;
+}
+
+#command-menu-wrapper {
+    padding: 2px 0;
+    background-color: darkcyan;
+}
+
+#command-menu-wrapper div {
+    text-align: right;
 }
