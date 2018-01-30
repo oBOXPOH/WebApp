@@ -24,18 +24,23 @@
                 </ul>
                 <div id="authentication">
                     @if (User.Identity.IsAuthenticated)
-                    {
-                        <p>@User.Identity.Name</p>
-                        <form method="post" asp-controller="Account" asp-action="LogOff">
-                            <input class="button" type="submit" value="Выход" />
-                        </form>
-                    }
-                    else
-                    {
-                        <a class="button" asp-controller="Account" asp-action="Login">Вход</a>
-                        <a class="button" asp-controller="Account" asp-action="Register">Регистрация</a>
-                    }
+                {
+                    <p>@User.Identity.Name</p>
+                    <form method="post" asp-controller="Account" asp-action="LogOff">
+                        <input class="button" type="submit" value="Выход" />
+                    </form>
+            }
+            else
+            {
+                <a class="button" asp-controller="Account" asp-action="Login">Вход</a>
+                <a class="button" asp-controller="Account" asp-action="Register">Регистрация</a>
+        }
                 </div>
+            </div>
+        </div>
+        <div id="command-menu-wrapper">
+            <div class="wrapper">
+                <a class="button" asp-controller="Users" asp-action="Index">Создать пользователя</a>
             </div>
         </div>
     </header>

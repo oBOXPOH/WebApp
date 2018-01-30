@@ -12,6 +12,11 @@ input {
     border: none;
 }
 
+button {
+    border: none;
+    cursor: pointer;
+}
+
 ul {
     list-style: none;
 }

@@ -4,9 +4,11 @@
 }
 
 .button {
+    display: inline-block;
     background-color: #5c5c3d;
     color: #d6d6c2;
-    padding: 5px 7px;
+    padding: 3px 7px;
+    font-size: 12px;
     border-radius: 12px;
 }
 
@@ -62,4 +64,13 @@
 
 #authentication :last-child {
     margin-left: 5px;
+}
+
+#command-menu-wrapper {
+    padding: 2px 0;
+    background-color: dimgray;
+}
+
+#command-menu-wrapper div {
+    text-align: center;
 }
