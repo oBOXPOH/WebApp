@@ -20,3 +20,21 @@ td {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.user-form hr {
+    width: 500px;
+    margin: 5px 0;
+}
+
+.user-form form div {
+    margin-bottom: 5px;
+}

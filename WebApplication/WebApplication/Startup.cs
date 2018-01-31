@@ -35,7 +35,8 @@ namespace WebApplication
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
             })
-                .AddEntityFrameworkStores<ApplicationContext>();
+                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddErrorDescriber<UserIdentityErrorDescriber>();
 
             services.AddMvc();
             services.AddRouting();

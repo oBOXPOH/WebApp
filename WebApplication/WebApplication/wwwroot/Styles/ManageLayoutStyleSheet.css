@@ -17,6 +17,17 @@
     color: white;
 }
 
+.input {
+    padding: 3px;
+    border: 1px solid gray;
+    border-radius: 6px;
+}
+
+.input:hover {
+    border-color: aqua;
+    box-shadow: 0 0 5px aqua;
+}
+
 #header-wrapper {
     background-color: darkred;
 }

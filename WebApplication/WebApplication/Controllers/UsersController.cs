@@ -23,6 +23,34 @@ namespace WebApplication.Controllers
             return View(userManager.Users.ToList());
         }
 
+        [HttpGet]
+        public IActionResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User { UserName = model.Login, Email = model.EMail, DOB = model.DOB };
+
+                var result = await userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Remove(string id)
         {
