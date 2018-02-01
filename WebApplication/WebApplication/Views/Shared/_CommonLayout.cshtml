@@ -38,11 +38,14 @@
                 </div>
             </div>
         </div>
-        <div id="command-menu-wrapper">
-            <div class="wrapper">
-                <a class="button" asp-controller="Users" asp-action="Index">Управление</a>
+        @if (User.IsInRole("Администратор"))
+        { 
+            <div id="command-menu-wrapper">
+                <div class="wrapper">
+                    <a class="button" asp-controller="Users" asp-action="Index">Управление</a>
+                </div>
             </div>
-        </div>
+        }
     </header>
     <div class="wrapper">
         @RenderBody()

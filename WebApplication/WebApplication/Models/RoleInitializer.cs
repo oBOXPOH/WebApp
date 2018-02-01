@@ -13,10 +13,10 @@ namespace WebApplication.Models
             string adminEmail = "rc_38@mail.ru";
             string adminPassword = "_veryhardpassword_";
 
-            foreach (var item in roleManager.Roles.ToList())
-            {
-                await roleManager.DeleteAsync(item);
-            }
+            //foreach (var item in roleManager.Roles.ToList())
+            //{
+            //    await roleManager.DeleteAsync(item);
+            //}
 
             if (await roleManager.FindByNameAsync("Администратор") == null)
             {
@@ -35,7 +35,7 @@ namespace WebApplication.Models
 
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                User admin = new User { Email = adminEmail, UserName = adminEmail };
+                User admin = new User { Email = adminEmail, UserName = "Admin" };
 
                 var result = await userManager.CreateAsync(admin, adminPassword);
 
