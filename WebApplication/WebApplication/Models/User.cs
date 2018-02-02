@@ -9,5 +9,6 @@ namespace WebApplication.Models
     public class User : IdentityUser
     {
         public DateTime DOB { get; set; }
+        public string UserRole { get; set; }
     }
 }

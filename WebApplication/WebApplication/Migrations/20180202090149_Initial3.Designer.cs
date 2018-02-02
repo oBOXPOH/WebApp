@@ -11,9 +11,10 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20180202090149_Initial3")]
+    partial class Initial3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,20 +149,6 @@ namespace WebApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("WebApplication.Models.Event", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Description");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("WebApplication.Models.User", b =>

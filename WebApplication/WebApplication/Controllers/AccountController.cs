@@ -11,11 +11,13 @@ namespace WebApplication.Controllers
 {
     public class AccountController : Controller
     {
+        ApplicationContext applicationContext;
         readonly UserManager<User> userManager;
         readonly SignInManager<User> signInManager;
 
-        public AccountController (UserManager<User> usrManager, SignInManager<User> sgnInManager)
+        public AccountController(UserManager<User> usrManager, SignInManager<User> sgnInManager, ApplicationContext appContext)
         {
+            applicationContext = appContext;
             userManager = usrManager;
             signInManager = sgnInManager;
         }
@@ -35,13 +37,21 @@ namespace WebApplication.Controllers
                 {
                     UserName = model.Login,
                     Email = model.EMail,
-                    DOB = model.DOB
+                    DOB = model.DOB,
+                    UserRole = "Пользователь"
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    Event evnt = new Event {
+                        Date = DateTime.Now,
+                        Description = $"{user.UserName} был зарегистрирован как {user.UserRole}"
+                    };
+
+                    await applicationContext.Events.AddAsync(evnt);
+
                     await signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }

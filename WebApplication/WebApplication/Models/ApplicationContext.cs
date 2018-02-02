@@ -10,6 +10,8 @@ namespace WebApplication.Models
     public class ApplicationContext : IdentityDbContext<User>
     {
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Event> Events { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
     }
 }

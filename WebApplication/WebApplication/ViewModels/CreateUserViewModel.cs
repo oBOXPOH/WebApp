@@ -26,5 +26,7 @@ namespace WebApplication.ViewModels
         [Display(Name = "Пароль")]
         [StringLength(16, ErrorMessage = "{0} должен содержать от {2} до {1} символов", MinimumLength = 6)]
         public string Password { get; set; }
+        
+        public string UserRole { get; set; }
     }
 }

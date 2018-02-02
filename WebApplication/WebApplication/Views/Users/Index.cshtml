@@ -22,9 +22,9 @@
             {
                 <tr>
                     <td>@item.UserName</td>
-                    <td>Пока не реализовано</td>
+                    <td>@item.UserRole</td>
                     <td>
-                        <form asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id" method="post">
+                        <form asp-controller="Users" asp-action="Remove" asp-route-id="@item.Id" method="post">
                             <button class="button" type="submit">Удалить</button>
                         </form>
                     </td>

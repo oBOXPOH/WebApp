@@ -28,6 +28,10 @@
     box-shadow: 0 0 5px aqua;
 }
 
+.select {
+    border-radius: 9px;
+}
+
 #header-wrapper {
     background-color: darkred;
 }

@@ -27,6 +27,9 @@
             <span asp-validation-for="Password"></span>
         </div>
         <div>
+            <select class="select" asp-for="UserRole" asp-items="ViewBag.Roles"></select>
+        </div>
+        <div>
             <a class="button" href='javascript:history.go(-1)'>Отмена</a>
             <input class="button" type="submit" value="Создать" />
         </div>
