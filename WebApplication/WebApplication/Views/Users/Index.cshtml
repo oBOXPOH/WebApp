@@ -24,9 +24,12 @@
                     <td>@item.UserName</td>
                     <td>@item.UserRole</td>
                     <td>
-                        <form asp-controller="Users" asp-action="Remove" asp-route-id="@item.Id" method="post">
-                            <button class="button" type="submit">Удалить</button>
-                        </form>
+                        @if (item.UserName != "Admin")
+                        {
+                            <form asp-controller="Users" asp-action="Remove" asp-route-id="@item.Id" method="post">
+                                <button class="button" type="submit">Удалить</button>
+                            </form>
+                        }
                     </td>
                 </tr>
             }
