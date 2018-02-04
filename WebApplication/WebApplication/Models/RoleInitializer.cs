@@ -10,8 +10,8 @@ namespace WebApplication.Models
     {
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string adminEmail = "rc_38@mail.ru";
-            string adminPassword = "_veryhardpassword_";
+            string adminName = "Admin";
+            string adminPassword = "k11111";
 
             //foreach (var item in roleManager.Roles.ToList())
             //{
@@ -33,9 +33,9 @@ namespace WebApplication.Models
                 await roleManager.CreateAsync(new IdentityRole("Пользователь"));
             }
 
-            if (await userManager.FindByNameAsync(adminEmail) == null)
+            if (await userManager.FindByNameAsync(adminName) == null)
             {
-                User admin = new User { Email = adminEmail, UserName = "Admin", UserRole = "Администратор" };
+                User admin = new User { Email = "admin@mail.ru", UserName = "Admin", UserRole = "Администратор" };
 
                 var result = await userManager.CreateAsync(admin, adminPassword);
 

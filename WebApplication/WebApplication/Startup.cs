@@ -34,8 +34,10 @@ namespace WebApplication
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
+                options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddEntityFrameworkStores<ApplicationContext>()
+                .AddDefaultTokenProviders()
                 .AddErrorDescriber<UserIdentityErrorDescriber>();
 
             services.AddMvc();

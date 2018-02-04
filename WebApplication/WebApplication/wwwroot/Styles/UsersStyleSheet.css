@@ -11,6 +11,10 @@ td {
     text-align: center;
 }
 
+.user-table tr:not([class=user-table-titletr]):hover {
+    background-color: darkkhaki;
+}
+
 #users {
     padding: 10px 0;
 }

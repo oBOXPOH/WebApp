@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication.Models;
 using WebApplication.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using WebApplication.Services;
 
 namespace WebApplication.Controllers
 {
@@ -45,14 +46,19 @@ namespace WebApplication.Controllers
 
                 if (result.Succeeded)
                 {
-                    Event evnt = new Event {
-                        Date = DateTime.Now,
-                        Description = $"{user.UserName} был зарегистрирован как {user.UserRole}"
-                    };
+                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    await applicationContext.Events.AddAsync(evnt);
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail",
+                        "Account",
+                        new { userId = user.Id, userCode = code },
+                        protocol: HttpContext.Request.Scheme);
 
-                    await signInManager.SignInAsync(user, false);
+                    EmailService emailService = new EmailService();
+
+                    await emailService.SendEmailAsync(model.EMail, "Подтвердите аккаунт",
+                        $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>ссылка</a>");
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -67,6 +73,32 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string userCode)
+        {
+            if (userId == null || userCode == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await userManager.ConfirmEmailAsync(user, userCode);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+                
+            else
+                return NotFound();
+        }
+
+        [HttpGet]
         public IActionResult Login(string url = null)
         {
             return View(new LoginUserViewModel { ReturnUrl = url });
@@ -78,6 +110,17 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                User user = await userManager.FindByNameAsync(model.LoginOrEmail);
+
+                if (user != null)
+                {
+                    if (!await userManager.IsEmailConfirmedAsync(user))
+                    {
+                        ModelState.AddModelError(string.Empty, "Вы не подтвердили свой email");
+                        return View(model);
+                    }
+                }
+
                 var result = await signInManager.PasswordSignInAsync(model.LoginOrEmail, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)

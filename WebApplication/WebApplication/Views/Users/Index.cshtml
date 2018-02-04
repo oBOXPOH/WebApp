@@ -1,4 +1,4 @@
-﻿@model  List<User>
+﻿@model  IndexUserViewModel
 
 @{
     Layout = "_ManageLayout";
@@ -12,13 +12,13 @@
 <div id="users">
     <h2>Список пользователей</h2><br />
     <div id="users-list">
-        <table>
-            <tr>
+        <table class="user-table">
+            <tr class="user-table-titletr">
                 <td>Логин</td>
                 <td>Роль</td>
                 <td>Действия</td>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Users)
             {
                 <tr>
                     <td>@item.UserName</td>
@@ -26,6 +26,7 @@
                     <td>
                         @if (item.UserName != "Admin")
                         {
+                            <a class="button" asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                             <form asp-controller="Users" asp-action="Remove" asp-route-id="@item.Id" method="post">
                                 <button class="button" type="submit">Удалить</button>
                             </form>
@@ -35,12 +36,19 @@
             }
         </table>
         <div>
-            Общее количество зарегистрированных: @Model.Count
-            <table>
-                <tr>
+            Общее количество зарегистрированных: @Model.Users.Count
+            <table class="user-table">
+                <tr class="user-table-titletr">
                     <td>Роль</td>
                     <td>Количество</td>
                 </tr>
+                @for (int i = 0; i < Model.Roles.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.Roles[i]</td>
+                        <td>@Model.AmountOfRoles[i]</td>
+                    </tr>
+                }
             </table>
         </div>
     </div>

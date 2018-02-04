@@ -27,7 +27,30 @@ namespace WebApplication.Controllers
 
         public IActionResult Index()
         {
-            return View(userManager.Users.ToList());
+            IndexUserViewModel model = new IndexUserViewModel { Users = userManager.Users.ToList() };
+
+            model.Roles = new List<string>();
+            model.AmountOfRoles = new List<int>();
+
+            foreach (var item in roleManager.Roles.ToList())
+            {
+                model.Roles.Add(item.Name);
+                model.AmountOfRoles.Add(0);
+            }
+
+            foreach (var user in model.Users)
+            {
+                for (int i = 0; i < model.Roles.Count; i++)
+                {
+                    if (model.Roles[i] == user.UserRole)
+                    {
+                        model.AmountOfRoles[i]++;
+                        break;
+                    }
+                }
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -65,7 +88,7 @@ namespace WebApplication.Controllers
                     Event evnt = new Event
                     {
                         Date = DateTime.Now,
-                        Description = $"{User.Identity.Name} создал {user.UserName} как {user.UserRole}"
+                        Description = $"«{User.Identity.Name}» создал пользователя «{user.UserName}» с правами «{user.UserRole}»"
                     };
 
                     await applicationContext.Events.AddAsync(evnt);
@@ -86,6 +109,75 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            User user = await userManager.FindByIdAsync(id);
+
+            if (user != null)
+            {
+                List<SelectListItem> roles = new List<SelectListItem>();
+
+                bool isSelected;
+
+                foreach (var item in roleManager.Roles.ToList())
+                {
+                    isSelected = false;
+                    if (item.Name == user.UserRole)
+                        isSelected = true;
+
+                    roles.Add(new SelectListItem { Value = item.Name, Text = item.Name, Selected = isSelected });
+                }
+
+                ViewBag.Roles = roles;
+
+                return View(new EditUserViewModel { Id = user.Id, Login = user.UserName, EMail = user.Email, DOB = user.DOB, UserRole = user.UserRole });
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await userManager.FindByIdAsync(model.Id);
+
+                if (user != null)
+                {
+                    user.UserName = model.Login;
+                    user.Email = model.EMail;
+                    user.DOB = model.DOB;
+                    user.UserRole = model.UserRole;
+
+                    var result = await userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        Event evnt = new Event
+                        {
+                            Date = DateTime.Now,
+                            Description = $"«{User.Identity.Name}» редактировал пользователя «{user.UserName}» с правами «{user.UserRole}»"
+                        };
+
+                        await applicationContext.Events.AddAsync(evnt);
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Remove(string id)
         {
@@ -93,15 +185,15 @@ namespace WebApplication.Controllers
 
             if (user != null)
             {
-                await userManager.DeleteAsync(user);
-
                 Event evnt = new Event
                 {
                     Date = DateTime.Now,
-                    Description = $"{User.Identity.Name} удалил {user.UserName}, который был {user.UserRole}"
+                    Description = $"«{User.Identity.Name}» удалил пользователя «{user.UserName}» с правами «{user.UserRole}»"
                 };
 
                 await applicationContext.Events.AddAsync(evnt);
+
+                await userManager.DeleteAsync(user);
             }
 
             return RedirectToAction("Index");

@@ -1,0 +1,29 @@
+﻿@model List<Event>
+
+@{
+    Layout = "_ManageLayout";
+    ViewBag.Title = "Список событий";
+}
+
+@section StylesSection {
+    <link href="~/Styles/EventsStyleSheet.css" rel="stylesheet" />
+}
+
+<div id="events">
+    <h2>Список событий</h2><br />
+    <div id="events-list">
+        <table class="event-table">
+            <tr class="event-table-titletr">
+                <td>Дата</td>
+                <td>Описание</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

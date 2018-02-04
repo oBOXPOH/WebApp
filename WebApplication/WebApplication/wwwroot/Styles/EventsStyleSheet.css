@@ -1,0 +1,26 @@
+﻿table {
+    border-collapse: collapse;
+}
+
+table, tr, td {
+    border: 1px solid black;
+}
+
+td {
+    padding: 7px;
+    text-align: center;
+}
+
+#events {
+    padding: 10px 0;
+}
+
+#events-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.event-table tr:not([class=event-table-titletr]):hover {
+    background-color: darkkhaki;
+}

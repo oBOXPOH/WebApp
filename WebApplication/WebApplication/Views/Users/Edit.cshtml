@@ -1,0 +1,40 @@
+﻿@model EditUserViewModel
+
+@{
+    Layout = "_ManageLayout";
+    ViewBag.Title = "Редактирование пользователя";
+}
+
+@section StylesSection {
+    <link href="~/Styles/UsersStyleSheet.css" rel="stylesheet" />
+    <link href="~/Styles/ValidationStyleSheet.css" rel="stylesheet" />
+}
+
+<div class="user-form">
+    <h2>Редактирование пользователя</h2><hr />
+    <form method="post" asp-controller="Users" asp-action="Edit">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input asp-for="Id" hidden />
+        <div>
+            <input class="input" asp-for="Login" placeholder="Логин" /><br />
+            <span asp-validation-for="Login"></span>
+        </div>
+        <div>
+            <input class="input" asp-for="EMail" placeholder="Email" /><br />
+            <span asp-validation-for="EMail"></span>
+        </div>
+        <div>
+            <select class="select" asp-for="UserRole" asp-items="ViewBag.Roles"></select>
+        </div>
+        <div>
+            <a class="button" href='javascript:history.go(-1)'>Отмена</a>
+            <input class="button" type="submit" value="Редактировать" />
+        </div>
+    </form>
+</div>
+
+@section ScriptsSection {
+    <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
