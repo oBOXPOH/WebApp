@@ -13,10 +13,10 @@ namespace WebApplication.Models
             string adminName = "Admin";
             string adminPassword = "k11111";
 
-            //foreach (var item in roleManager.Roles.ToList())
-            //{
-            //    await roleManager.DeleteAsync(item);
-            //}
+            foreach (var item in roleManager.Roles.ToList())
+            {
+                await roleManager.DeleteAsync(item);
+            }
 
             if (await roleManager.FindByNameAsync("Администратор") == null)
             {
@@ -35,13 +35,27 @@ namespace WebApplication.Models
 
             if (await userManager.FindByNameAsync(adminName) == null)
             {
-                User admin = new User { Email = "admin@mail.ru", UserName = "Admin", UserRole = "Администратор" };
+                User admin = new User { Email = "admin@mail.ru", UserName = "Admin", UserRole = "Администратор", EmailConfirmed = true };
 
                 var result = await userManager.CreateAsync(admin, adminPassword);
 
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(admin, "Администратор");
+                    await userManager.AddToRoleAsync(admin, admin.UserRole);
+                }
+            }
+
+            User user;
+
+            for (int i = 0; i < 10; i++)
+            {
+                user = new User { Email = $"user{i}@mail.ru", UserName = $"User{i}", UserRole = "Пользователь", EmailConfirmed = true };
+
+                var result = await userManager.CreateAsync(user, "k11111");
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, user.UserRole);
                 }
             }
         }

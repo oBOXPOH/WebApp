@@ -85,6 +85,8 @@ namespace WebApplication.Controllers
 
                 if (result.Succeeded)
                 {
+                    await userManager.AddToRoleAsync(await userManager.FindByEmailAsync(user.Email), user.UserRole);
+
                     Event evnt = new Event
                     {
                         Date = DateTime.Now,
@@ -155,6 +157,10 @@ namespace WebApplication.Controllers
 
                     if (result.Succeeded)
                     {
+                        string role = (await userManager.GetRolesAsync(user) as List<string>).ElementAt(0);
+                        await userManager.RemoveFromRoleAsync(user, role);
+                        await userManager.AddToRoleAsync(user, user.UserRole);
+
                         Event evnt = new Event
                         {
                             Date = DateTime.Now,

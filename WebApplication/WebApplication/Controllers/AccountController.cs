@@ -46,6 +46,8 @@ namespace WebApplication.Controllers
 
                 if (result.Succeeded)
                 {
+                    await userManager.AddToRoleAsync(await userManager.FindByEmailAsync(user.Email), user.UserRole);
+
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     var callbackUrl = Url.Action(
@@ -139,6 +141,85 @@ namespace WebApplication.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Forgot()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Forgot(ForgotUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await userManager.FindByEmailAsync(model.EMail);
+
+                if (user != null)
+                {
+                    var code = await userManager.GeneratePasswordResetTokenAsync(user);
+
+                    var link = Url.Action(
+                        "ResetPassword",
+                        "Account",
+                        new { userId = user.Id, userCode = code },
+                        HttpContext.Request.Scheme);
+
+                    EmailService emailService = new EmailService();
+
+                    await emailService.SendEmailAsync(model.EMail, "Восстановление пароля", $"Для восстановления пароля перейдите по ссылке: <a href='{link}'>ссылка</a>");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Такой Email не зарегистрирован");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword(string userId, string userCode)
+        {
+            if (userId == null || userCode == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(new ResetPasswordUserViewModel { UserId = user.Id, UserCode = userCode });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await userManager.FindByIdAsync(model.UserId);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await userManager.ResetPasswordAsync(user, model.UserCode, model.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                return NotFound();
+            }
+
+            return View();
         }
 
         [HttpPost]
