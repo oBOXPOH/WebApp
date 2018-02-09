@@ -1,0 +1,15 @@
+﻿@model MessageViewModel
+
+@{
+    Layout = "_CommonLayout";
+    ViewBag.Title = "Ошибка";
+}
+
+@section StylesSection {
+    <link href="~/Styles/HomeStyleSheet.css" rel="stylesheet" />
+}
+
+<div class="message">
+    <h2>Ошибка!</h2><br />
+    @Html.Raw(Model.Description)
+</div>

@@ -61,7 +61,7 @@ namespace WebApplication.Controllers
                     await emailService.SendEmailAsync(model.EMail, "Подтвердите аккаунт",
                         $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>ссылка</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Message", "Home", new { message = "Подтверждение отправлено на указанную вами почту." });
                 }
                 else
                 {
@@ -86,18 +86,20 @@ namespace WebApplication.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home", new { message = "Произошла какая-то ошибка! <br><br><a class='button' href='/Home/Index'>Вернуться на главную</a>" });
             }
 
             var result = await userManager.ConfirmEmailAsync(user, userCode);
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Message", "Home", new { message = "Подтверждение прошло успешно! Теперь вы можете авторизоваться на сайте!<br><br><a class='button' href='/Account/Login'>Авторизоваться</a>" });
             }
-                
+
             else
-                return NotFound();
+            {
+                return RedirectToAction("Error", "Home", new { message = "Произошла какая-то ошибка! <br><br><a class='button' href='/Home/Index'>Вернуться на главную</a>" });
+            }
         }
 
         [HttpGet]
@@ -169,6 +171,8 @@ namespace WebApplication.Controllers
                     EmailService emailService = new EmailService();
 
                     await emailService.SendEmailAsync(model.EMail, "Восстановление пароля", $"Для восстановления пароля перейдите по ссылке: <a href='{link}'>ссылка</a>");
+
+                    return RedirectToAction("Message", "Home", new { message = "Ссылка на восстановление пароля отправлена на указанную вами почту." });
                 }
                 else
                 {
@@ -191,7 +195,7 @@ namespace WebApplication.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home", new { message = "Произошла какая-то ошибка! <br><br><a class='button' href='/Home/Index'>Вернуться на главную</a>" });
             }
 
             return View(new ResetPasswordUserViewModel { UserId = user.Id, UserCode = userCode });
@@ -206,7 +210,7 @@ namespace WebApplication.Controllers
 
                 if (user == null)
                 {
-                    return NotFound();
+                    return RedirectToAction("Error", "Home", new { message = "Произошла какая-то ошибка! <br><br><a class='button' href='/Home/Index'>Вернуться на главную</a>" });
                 }
 
                 var result = await userManager.ResetPasswordAsync(user, model.UserCode, model.Password);
@@ -216,7 +220,7 @@ namespace WebApplication.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                return NotFound();
+                return RedirectToAction("Error", "Home", new { message = "Произошла какая-то ошибка! <br><br><a class='button' href='/Home/Index'>Вернуться на главную</a>" });
             }
 
             return View();
