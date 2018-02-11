@@ -38,11 +38,15 @@
                 </div>
             </div>
         </div>
-        @if (User.IsInRole("Администратор"))
-        { 
+        @if (User.IsInRole("Администратор")||User.IsInRole("Модератор"))
+        {
             <div id="command-menu-wrapper">
                 <div class="wrapper">
-                    <a class="button" asp-controller="Users" asp-action="Index">Управление</a>
+                    @RenderSection("CommandMenuSection", false)
+                    @if (User.IsInRole("Администратор"))
+                    {
+                        <a class="button" asp-controller="Users" asp-action="Index">Управление</a>
+                    }
                 </div>
             </div>
         }

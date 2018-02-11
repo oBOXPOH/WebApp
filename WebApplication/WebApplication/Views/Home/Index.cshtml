@@ -3,4 +3,9 @@
     ViewBag.Title = "Главная страница";
 }
 
-<h1>ДРАТУТИ!</h1>
+@if (User.IsInRole("Администратор")||User.IsInRole("Модератор"))
+{
+    @section CommandMenuSection {
+        <a class="button" asp-controller="Articles" asp-action="Create">Добавить статью</a>
+    }
+}

@@ -130,10 +130,10 @@ namespace WebApplication.Migrations
 
             modelBuilder.Entity("WebApplication.Models.Article", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("EditTime");
+                    b.Property<DateTime>("EditDate");
 
                     b.Property<string>("FullDescription");
 
@@ -143,7 +143,7 @@ namespace WebApplication.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 

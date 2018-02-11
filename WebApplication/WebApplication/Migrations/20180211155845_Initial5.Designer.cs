@@ -11,8 +11,8 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20180202090149_Initial3")]
-    partial class Initial3
+    [Migration("20180211155845_Initial5")]
+    partial class Initial5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,10 +131,10 @@ namespace WebApplication.Migrations
 
             modelBuilder.Entity("WebApplication.Models.Article", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("EditTime");
+                    b.Property<DateTime>("EditDate");
 
                     b.Property<string>("FullDescription");
 
@@ -144,11 +144,25 @@ namespace WebApplication.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("WebApplication.Models.User", b =>
