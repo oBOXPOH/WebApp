@@ -13,10 +13,19 @@ namespace WebApplication.Models
             string adminName = "Admin";
             string adminPassword = "k11111";
 
+
+
             foreach (var item in roleManager.Roles.ToList())
             {
                 await roleManager.DeleteAsync(item);
             }
+
+            foreach (var item in userManager.Users.ToList())
+            {
+                await userManager.DeleteAsync(item);
+            }
+
+
 
             if (await roleManager.FindByNameAsync("Администратор") == null)
             {

@@ -1,0 +1,30 @@
+﻿@model List<Article>
+
+@{
+    Layout = "_CommonLayout";
+    ViewBag.Title = "Список статей";
+}
+
+@section StylesSection {
+    <link href="~/Styles/ArticlesStyleSheet.css" rel="stylesheet" />
+}
+
+<div id="articles">
+    <div id="articles-list">
+        @foreach (var item in Model)
+        {
+            <div class="article">
+                <a href="#">
+                    <h2>@item.Title</h2>
+                    <div class="article-date">
+                        @item.PostDate
+                    </div>
+                    <div class="article-shortdescription">
+                        @Html.Raw(item.ShortDescription)
+                    </div>
+                </a>
+                <hr />
+            </div>
+        }
+    </div>
+</div>

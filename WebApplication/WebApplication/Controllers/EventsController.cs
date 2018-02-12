@@ -18,7 +18,12 @@ namespace WebApplication.Controllers
 
         public IActionResult Index()
         {
-            return View(applicationContext.Events.ToList().OrderByDescending(p => p.Date));
+            List<Event> events = applicationContext.Events.ToList();
+
+            if (events.Count != 0)
+                return View(events.OrderByDescending(p => p.Date));
+            else
+                return View(events);
         }
     }
 }

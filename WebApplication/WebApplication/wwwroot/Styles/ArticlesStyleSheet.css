@@ -1,0 +1,62 @@
+﻿#articles {
+    padding: 10px 0;
+}
+
+#articles-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.article {
+    opacity: 0.6;
+}
+
+.article:hover {
+    opacity: 1;
+}
+
+.article a {
+    display: block;
+    color: black;
+    width: 800px;
+}
+
+.article-date {
+    text-align: right;
+}
+
+.article-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.article-form hr {
+    width: 600px;
+    margin: 5px 0;
+}
+
+.article-form form div {
+    margin-bottom: 5px;
+}
+
+.article-form .input {
+    width: 600px;
+}
+
+.article-form-shortdescription {
+    height: 100px;
+}
+
+.article-form-fulldescription {
+    height: 400px;
+}
+
+.article-form textarea {
+    min-width: 600px;
+}

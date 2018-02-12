@@ -1,0 +1,41 @@
+﻿@model CreateArticleViewModel
+
+@{
+    Layout = "_CommonLayout";
+    ViewBag.Title = "Создание новой статьи";
+}
+
+@section StylesSection {
+    <link href="~/Styles/ArticlesStyleSheet.css" rel="stylesheet" />
+    <link href="~/Styles/ValidationStyleSheet.css" rel="stylesheet" />
+}
+
+<div class="article-form">
+    <h2>Создание новой статьи</h2><hr />
+    <form method="post" asp-controller="Articles" asp-action="Create">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <input class="input" asp-for="Title" placeholder="Название статьи" /><br />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <textarea class="input article-form-shortdescription" asp-for="ShortDescription" placeholder="Краткое содержание статьи"></textarea><br />
+            <span asp-validation-for="ShortDescription"></span>
+        </div>
+        <div>
+            <textarea class="input article-form-fulldescription" asp-for="FullDescription" placeholder="Полное описание статьи"></textarea><br />
+            <span asp-validation-for="FullDescription"></span>
+        </div>
+        <div>
+            <a class="button" href='javascript:history.go(-1)'>Отмена</a>
+            <input class="button" type="submit" value="Создать" />
+        </div>
+    </form>
+</div>
+
+@section ScriptsSection {
+    <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
