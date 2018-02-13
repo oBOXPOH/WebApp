@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication.Models;
 using WebApplication.ViewModels;
 
@@ -61,6 +62,65 @@ namespace WebApplication.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id != null)
+            {
+                Article article = await applicationContext.Articles.FirstOrDefaultAsync(p => p.Id == id);
+
+                if (article != null)
+                    return View(new EditArticleViewModel { Id = article.Id, Title = article.Title, ShortDescription = article.ShortDescription, FullDescription = article.FullDescription });
+
+                return Redirect("vk.com");
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditArticleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Article article = await applicationContext.Articles.FirstOrDefaultAsync(p => p.Id == model.Id);
+
+                article.Title = model.Title;
+                article.ShortDescription = model.ShortDescription;
+                article.FullDescription = model.FullDescription;
+
+                article.EditDate = DateTime.Now;
+
+                if (article != null)
+                {
+                    applicationContext.Articles.Update(article);
+                    await applicationContext.SaveChangesAsync();
+
+                    return RedirectToAction("Index", "Articles");
+                }
+
+                return NotFound();
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id != null)
+            {
+                Article article = await applicationContext.Articles.FirstOrDefaultAsync(p => p.Id == id);
+
+                applicationContext.Articles.Remove(article);
+                await applicationContext.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Articles");
+            }
+
+            return NotFound();
         }
     }
 }

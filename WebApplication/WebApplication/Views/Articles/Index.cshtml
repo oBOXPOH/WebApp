@@ -17,13 +17,19 @@
                 <a href="#">
                     <h2>@item.Title</h2>
                     <div class="article-date">
-                        @item.PostDate
+                        Дата публикации: @item.PostDate
                     </div>
                     <div class="article-shortdescription">
                         @Html.Raw(item.ShortDescription)
                     </div>
                 </a>
                 <hr />
+                <div class="article-commands">
+                    <a class="button" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
+                    <form method="post" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">
+                        <input class="button" type="submit" value="Удалить" />
+                    </form>
+                </div>
             </div>
         }
     </div>

@@ -1,29 +1,35 @@
 ﻿#articles {
-    padding: 10px 0;
 }
 
 #articles-list {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .article {
-    opacity: 0.6;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .article:hover {
-    opacity: 1;
+    background-color: antiquewhite;
 }
 
-.article a {
+.article > a {
     display: block;
     color: black;
     width: 800px;
+    margin-bottom: 10px;
 }
 
-.article-date {
+.article img {
+    width: 800px;
+}
+
+.article-date,
+.article-commands {
     text-align: right;
 }
 
