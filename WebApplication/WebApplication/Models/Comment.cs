@@ -13,5 +13,6 @@ namespace WebApplication.Models
         public DateTime PostDate { get; set; }
         public DateTime EditDate { get; set; }
         public string Content { get; set; }
+        public int Likes { get; set; }
     }
 }
