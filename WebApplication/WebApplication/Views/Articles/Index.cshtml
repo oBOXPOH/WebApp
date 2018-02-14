@@ -25,8 +25,8 @@
                 </a>
                 <hr />
                 <div class="article-commands">
-                    <a class="button" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                     <form method="post" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">
+                        <a class="button" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                         <input class="button" type="submit" value="Удалить" />
                     </form>
                 </div>

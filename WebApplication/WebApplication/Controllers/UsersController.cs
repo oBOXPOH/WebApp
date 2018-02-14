@@ -94,6 +94,7 @@ namespace WebApplication.Controllers
                     };
 
                     await applicationContext.Events.AddAsync(evnt);
+                    await applicationContext.SaveChangesAsync();
 
                     await userManager.AddToRoleAsync(user, user.UserRole);
 
@@ -168,6 +169,7 @@ namespace WebApplication.Controllers
                         };
 
                         await applicationContext.Events.AddAsync(evnt);
+                        await applicationContext.SaveChangesAsync();
 
                         return RedirectToAction("Index");
                     }
@@ -198,6 +200,7 @@ namespace WebApplication.Controllers
                 };
 
                 await applicationContext.Events.AddAsync(evnt);
+                await applicationContext.SaveChangesAsync();
 
                 await userManager.DeleteAsync(user);
             }

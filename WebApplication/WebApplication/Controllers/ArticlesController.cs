@@ -48,8 +48,6 @@ namespace WebApplication.Controllers
 
                 await applicationContext.Articles.AddAsync(article);
 
-                await applicationContext.SaveChangesAsync();
-
                 Event evnt = new Event
                 {
                     Date = DateTime.Now,
@@ -57,6 +55,7 @@ namespace WebApplication.Controllers
                 };
 
                 await applicationContext.Events.AddAsync(evnt);
+                await applicationContext.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Articles");
             }
@@ -96,6 +95,14 @@ namespace WebApplication.Controllers
                 if (article != null)
                 {
                     applicationContext.Articles.Update(article);
+
+                    Event evnt = new Event
+                    {
+                        Date = DateTime.Now,
+                        Description = $"«{User.Identity.Name}» редактировал статью с названием «{article.Title}»"
+                    };
+
+                    await applicationContext.Events.AddAsync(evnt);
                     await applicationContext.SaveChangesAsync();
 
                     return RedirectToAction("Index", "Articles");
@@ -115,6 +122,14 @@ namespace WebApplication.Controllers
                 Article article = await applicationContext.Articles.FirstOrDefaultAsync(p => p.Id == id);
 
                 applicationContext.Articles.Remove(article);
+
+                Event evnt = new Event
+                {
+                    Date = DateTime.Now,
+                    Description = $"«{User.Identity.Name}» удалил статью с названием «{article.Title}»"
+                };
+
+                await applicationContext.Events.AddAsync(evnt);
                 await applicationContext.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Articles");

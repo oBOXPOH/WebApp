@@ -21,7 +21,7 @@ namespace WebApplication.Controllers
             List<Event> events = applicationContext.Events.ToList();
 
             if (events.Count != 0)
-                return View(events.OrderByDescending(p => p.Date));
+                return View(events.OrderByDescending(p => p.Date).ToList());
             else
                 return View(events);
         }
