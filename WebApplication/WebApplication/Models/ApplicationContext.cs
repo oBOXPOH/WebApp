@@ -9,6 +9,9 @@ namespace WebApplication.Models
 {
     public class ApplicationContext : IdentityDbContext<User>
     {
+        public DbSet<FirstLevelSection> FirstLevelSections { get; set; }
+        public DbSet<FirstLevelSection> SecondLevelSections { get; set; }
+
         public DbSet<Article> Articles { get; set; }
         public DbSet<Event> Events { get; set; }
 

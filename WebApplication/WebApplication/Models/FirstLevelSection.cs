@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    public class FirstLevelTitle
+    public class FirstLevelSection
     {
         public string Id { get; set; }
         public string Title { get; set; }

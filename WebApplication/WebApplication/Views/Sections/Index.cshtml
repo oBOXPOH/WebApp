@@ -1,0 +1,22 @@
+﻿@model List<FirstLevelSection>
+
+@{
+    Layout = "_CommonLayout";
+    ViewBag.Title = "Список разделов";
+}
+
+@section StylesSection {
+    <link href="~/Styles/SectionsStyleSheet.css" rel="stylesheet" />
+}
+
+
+<div id="sections">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li class="section">
+                <a href="#">@item.Title</a>
+            </li>
+        }
+    </ul>
+</div>
