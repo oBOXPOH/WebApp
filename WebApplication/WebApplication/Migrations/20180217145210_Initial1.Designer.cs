@@ -11,9 +11,10 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20180217145210_Initial1")]
+    partial class Initial1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,8 +175,6 @@ namespace WebApplication.Migrations
                     b.Property<DateTime>("EditDate");
 
                     b.Property<DateTime>("PublishDate");
-
-                    b.Property<string>("Slug");
 
                     b.Property<string>("Title");
 

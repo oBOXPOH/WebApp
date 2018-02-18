@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace WebApplication.Migrations
 {
-    public partial class Initial5 : Migration
+    public partial class Initial1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,7 @@ namespace WebApplication.Migrations
                     FullDescription = table.Column<string>(nullable: true),
                     PostDate = table.Column<DateTime>(nullable: false),
                     ShortDescription = table.Column<string>(nullable: true),
+                    SubLevelTitleId = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
@@ -79,6 +80,35 @@ namespace WebApplication.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FirstLevelSections",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    EditDate = table.Column<DateTime>(nullable: false),
+                    PublishDate = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FirstLevelSections", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SecondLevelSections",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    EditDate = table.Column<DateTime>(nullable: false),
+                    FirstLevelTitleId = table.Column<string>(nullable: true),
+                    PostDate = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SecondLevelSections", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,6 +279,12 @@ namespace WebApplication.Migrations
 
             migrationBuilder.DropTable(
                 name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "FirstLevelSections");
+
+            migrationBuilder.DropTable(
+                name: "SecondLevelSections");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

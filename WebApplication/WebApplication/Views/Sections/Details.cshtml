@@ -1,0 +1,37 @@
+﻿@model DetailsFirstLevelSectionViewModel
+
+@{
+    Layout = "_CommonLayout";
+    ViewBag.Title = Model.Title;
+}
+
+@section StylesSection {
+    <link href="~/Styles/SectionsStyleSheet.css" rel="stylesheet" />
+}
+
+@section CommandMenuSection {
+    @if (User.IsInRole("Администратор") || User.IsInRole("Модератор"))
+    {
+        <a class="button" asp-controller="Sections" asp-action="Create">Создать подраздел</a>
+    }
+}
+
+
+<div id="sections">
+    @if (Model.SecondLevelSections.Count == 0)
+    {
+        <h2>Разделов пока нет</h2>
+    }
+    else
+    {
+        <h2>@Model.Title</h2>
+        <ul>
+            @foreach (var item in Model.SecondLevelSections)
+            {
+                <li class="section">
+                    <a href="#">@item.Title</a>
+                </li>
+            }
+        </ul>
+    }
+</div>

@@ -4,3 +4,21 @@
 #sections ul {
     list-style: circle;
 }
+
+#section-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+#section-form hr {
+    width: 500px;
+    margin: 5px 0;
+}
+
+
+#section-form div {
+    margin-bottom: 5px;
+}

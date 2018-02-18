@@ -11,8 +11,8 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20180211155845_Initial5")]
-    partial class Initial5
+    [Migration("20180218071529_Initial2")]
+    partial class Initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,6 +142,8 @@ namespace WebApplication.Migrations
 
                     b.Property<string>("ShortDescription");
 
+                    b.Property<string>("SubLevelTitleId");
+
                     b.Property<string>("Title");
 
                     b.Property<string>("UserId");
@@ -163,6 +165,42 @@ namespace WebApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.FirstLevelSection", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("EditDate");
+
+                    b.Property<DateTime>("PublishDate");
+
+                    b.Property<string>("Slug");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FirstLevelSections");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.SecondLevelSection", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("EditDate");
+
+                    b.Property<string>("FirstLevelTitleId");
+
+                    b.Property<DateTime>("PostDate");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SecondLevelSections");
                 });
 
             modelBuilder.Entity("WebApplication.Models.User", b =>

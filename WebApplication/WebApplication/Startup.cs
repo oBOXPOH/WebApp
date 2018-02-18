@@ -59,23 +59,14 @@ namespace WebApplication
 
             app.UseAuthentication();
 
-            app.UseMvcWithDefaultRoute();
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            //app.UseMvcWithDefaultRoute();
 
-            //var routeHandler = new RouteHandler(Handle);
-            //var routeBuilder = new RouteBuilder(app, routeHandler);
-            //routeBuilder.MapRoute("extended", "NewRoute/{controller}/{action}/{id?}");
-            //app.UseRouter(routeBuilder.Build());
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
-
-        //public async Task Handle(HttpContext context)
-        //{
-        //    await context.Response.WriteAsync("ROUTE!");
-        //}
     }
 }

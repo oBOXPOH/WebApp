@@ -18,9 +18,9 @@
         <div id="menu-wrapper">
             <div class="wrapper">
                 <ul id="menu">
-                    <li><a href="/Articles/Index">Статьи</a></li>
+                    <li><a asp-controller="Sections" asp-action="Index">Разделы</a></li>
                     <li><a href="#">Пользователи</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="/Articles/Index">Статьи</a></li>
                 </ul>
                 <div id="authentication">
                     @if (User.Identity.IsAuthenticated)

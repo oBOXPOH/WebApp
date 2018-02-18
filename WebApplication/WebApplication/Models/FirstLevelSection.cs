@@ -9,7 +9,8 @@ namespace WebApplication.Models
     {
         public string Id { get; set; }
         public string Title { get; set; }
-        public DateTime PostDate { get; set; }
+        public DateTime PublishDate { get; set; }
         public DateTime EditDate { get; set; }
+        public string Slug { get; set; }
     }
 }

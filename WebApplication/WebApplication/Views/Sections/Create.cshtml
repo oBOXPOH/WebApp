@@ -1,0 +1,25 @@
+﻿@model CreateFirstLevelSectionViewModel
+
+@{
+    Layout = "_CommonLayout";
+    ViewBag.Title = "Создание нового раздела";
+}
+
+@section StylesSection {
+    <link href="~/Styles/SectionsStyleSheet.css" rel="stylesheet" />
+}
+
+<div id="section-form">
+    <form method="post" asp-controller="Sections" asp-action="Create">
+        <h2>Создание нового раздела</h2><hr />
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <input class="input" asp-for="Title" placeholder="Название раздела" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <a class="button" href='javascript:history.go(-1)'>Отмена</a>
+            <input class="button" type="submit" value="Создать" />
+        </div>
+    </form>
+</div>
