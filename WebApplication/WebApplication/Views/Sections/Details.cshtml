@@ -16,7 +16,7 @@
     }
 }
 
-
+<h2>@Model.Title</h2>
 <div id="sections">
     @if (Model.SecondLevelSections.Count == 0)
     {
@@ -24,7 +24,6 @@
     }
     else
     {
-        <h2>@Model.Title</h2>
         <ul>
             @foreach (var item in Model.SecondLevelSections)
             {

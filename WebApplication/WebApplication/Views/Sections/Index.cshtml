@@ -12,7 +12,7 @@
 @section CommandMenuSection {
     @if (User.IsInRole("Администратор")||User.IsInRole("Модератор"))
     {
-        <a class="button" asp-controller="Sections" asp-action="Create">Создать раздел</a>
+        <a class="button" asp-controller="Action" asp-action="Create" asp-route-actionType="@ActionType.FirstLevelSection">Создать раздел</a>
     }
 }
 
@@ -30,7 +30,7 @@
             {
             <li class="section">
                 @*<a asp-controller="Sections" asp-action="Details" asp-route-id="@item.Id" asp->@item.Title</a>*@
-                <a href="@Url.RouteUrl(new { controller = "Sections", action = "Details" })">@item.Title</a>
+                <a href="@Url.RouteUrl(new { fstLevelSection = item.Slug })">@item.Title</a>
             </li>
             }
         </ul>
